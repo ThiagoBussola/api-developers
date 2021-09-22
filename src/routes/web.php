@@ -19,9 +19,9 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'developers'], function() use($router) {
-    $router->get('/', 'DeveloperController@index');
-    $router->get('/{developerId}', 'DeveloperController@show');
     $router->post('/', 'DeveloperController@create');
-//     $router->put('/{developerId}', 'DeveloperController@update');
-//     $router->delete('/{developerId}', 'DeveloperController@destroy');
+    $router->get('/', 'DeveloperController@list');
+    $router->get('/{developerId}', 'DeveloperController@findById');
+    $router->put('/{developerId}', 'DeveloperController@update');
+    $router->delete('/{developerId}', 'DeveloperController@remove');
 });

@@ -26,21 +26,37 @@ class DeveloperController extends Controller{
         }
     }
 
-    public function index() {
+    public function list() {
         return Developer::paginate(10);
     }
 
-    public function show($developerId) {
+    public function findById($developerId) {
         return Developer::findOrFail($developerId);
     }
 
 
-    // public function update() {
+    public function update($developerId, Request $request) {
+        try {
+            $developer = Developer::find($developerId);
+    
+            $developer->update($request->all());
+    
+            return response()->json(['data' => ['message' => 'Developer updated!']]);
+        } catch(Exception $e) {
+            echo 'Exception Catch: ', $e->getMessage(), "\n";
+        }
+    }
 
-    // }
-
-    // public function remove() {
-
-    // }
+    public function remove($developerId) {
+        try {
+            $developer = Developer::find($developerId);
+    
+            $developer->delete();
+    
+            return response()->json(['data' => ['message' => 'Developer deleted!']]);
+        } catch(Exception $e) {
+            echo 'Exception Catch: ', $e->getMessage(), "\n";
+        }
+    }
     
 }
