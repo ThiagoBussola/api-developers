@@ -27,17 +27,26 @@ class DeveloperController extends Controller{
     }
 
     public function list() {
-        return Developer::paginate(10);
+        try {
+            return Developer::paginate(10);
+
+        }catch(Exception $e) {
+            echo 'Exception Catch: ', $e->getMessage(), "\n";
+        }
     }
 
-    public function findById($developerId) {
-        return Developer::findOrFail($developerId);
+    public function findById($developerId) {   
+        try {
+            return Developer::findOrFail($developerId);
+        }catch(Exception $e) {
+            echo 'Exception Catch: ', $e->getMessage(), "\n";
+        }
     }
 
 
     public function update($developerId, Request $request) {
         try {
-            $developer = Developer::find($developerId);
+            $developer = Developer::findOrFail($developerId);
     
             $developer->update($request->all());
     
@@ -49,7 +58,7 @@ class DeveloperController extends Controller{
 
     public function remove($developerId) {
         try {
-            $developer = Developer::find($developerId);
+            $developer = Developer::findOrFail($developerId);
     
             $developer->delete();
     
