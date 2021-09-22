@@ -16,6 +16,7 @@ class CreateDevelopersTable extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            // não encontrei uma função no faker para adionar uma letra aleatoria, por isso não coloquei limite no campo char
             $table->char('sexo');
             $table->integer('idade');
             $table->string('hobby');

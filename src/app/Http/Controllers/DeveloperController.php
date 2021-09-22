@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use \App\Models\Developer;
+use Exception;
 use Illuminate\Http\Request;
 
 class DeveloperController extends Controller{
@@ -15,10 +16,14 @@ class DeveloperController extends Controller{
      */
 
     public function create(Request $request) {
-       $developer = Developer::create($request->all());
-
-
-        return response()->json($developer);
+        try {
+            $developer = Developer::create($request->all());
+     
+     
+             return response()->json($developer);
+        } catch(Exception $e) {
+            echo 'Exception Catch: ', $e->getMessage(), "\n";
+        }
     }
 
     public function index() {
