@@ -1,5 +1,6 @@
 <?php
 
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -14,5 +15,13 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'API REST Gazin with Laravel ' . $router->app->version();
+});
+
+$router->group(['prefix' => 'developers'], function() use($router) {
+    $router->get('/', 'DeveloperController@index');
+    $router->get('/{developerId}', 'DeveloperController@show');
+    $router->post('/', 'DeveloperController@create');
+//     $router->put('/{developerId}', 'DeveloperController@update');
+//     $router->delete('/{developerId}', 'DeveloperController@destroy');
 });
